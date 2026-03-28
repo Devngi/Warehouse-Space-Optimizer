@@ -71,3 +71,5 @@ Once the table is complete, the app "walks backward" from the final cell to iden
 3. **Run the application:**
    ```bash
    streamlit run app.py
+
+For better visualization - use it in Light mode
