@@ -1,81 +1,73 @@
-📦 Warehouse Space Optimizer
+# 📦 Warehouse Space Optimizer (0/1 Knapsack)
 
-Solving the 0/1 Knapsack Problem with Dynamic Programming
+An interactive web application built with **Streamlit** that uses the **0/1 Knapsack Algorithm** to solve a real-world logistics challenge: maximizing profit within a limited storage volume.
 
-This project is a visual demonstration of the 0/1 Knapsack Problem, a classic optimization challenge in computer science. It simulates a warehouse scenario where a manager must decide which boxes to store to maximize total value without exceeding the warehouse's volume capacity.
+---
 
-🧠 The Core Concept: What is 0/1 Knapsack?
-The "0/1" indicates a binary choice: for every item, you must either take it (1) or leave it (0). You cannot take a fraction of an item (like half a box) or multiple copies of the same item.
+## 🧠 The Concept: What is the 0/1 Knapsack Problem?
 
-The Challenge
+The **0/1 Knapsack Problem** is a classic optimization puzzle in computer science. 
 
-Imagine you have a bag (or warehouse) with a limit of 10kg. You have:
+### The Scenario
+You have a warehouse with a fixed maximum **Capacity** (Volume) and a set of **Items** (Boxes). Each item has a:
+1.  **Weight** (Calculated as $Length \times Width \times Height$)
+2.  **Value** (Price)
 
-Box A: 8kg, Value $60
+### The Constraint ("0/1")
+The "0/1" means you cannot take a fraction of an item. You either take the box (**1**) or leave it (**0**). You must decide which combination of boxes yields the highest total price without exceeding the warehouse volume.
 
-Box B: 5kg, Value $40
+---
 
-Box C: 5kg, Value $40
+## 🛠️ How It Works: Dynamic Programming (DP)
 
-If you are "greedy" and take the most valuable item first (Box A), you fill 8kg and can't fit anything else (Total: $60).
-The Optimal Solution is to take Box B and Box C (Total: $80), even though they are individually worth less than Box A.
+Instead of checking every possible combination (which is inefficient), this app uses **Bottom-Up Dynamic Programming**. 
 
-🛠️ How the Algorithm Works
-This app uses Dynamic Programming (DP). Instead of calculating every possible combination (which would take 2 
-n
-  time), DP breaks the problem into smaller sub-problems and stores the results in a table.
+### 1. The Recurrence Relation
+The algorithm fills a 2D grid where each cell represents the maximum value attainable for a given capacity using a subset of items:
 
-1. The Decision Matrix
+$$
+DP[i][w] = 
+\begin{cases} 
+\max(v_i + DP[i-1][w-w_i], DP[i-1][w]) & \text{if } w_i \leq w \\
+DP[i-1][w] & \text{otherwise}
+\end{cases}
+$$
 
-The algorithm builds a table where:
+### 2. Backtracking
+Once the table is complete, the app "walks backward" from the final cell to identify exactly which boxes were selected to reach that optimal value.
 
-Rows represent the items available.
+---
 
-Columns represent increasing weight capacities (from 0 to Max).
+## ✨ Features
 
-2. The Logic
+* **Custom Inventory:** Add as many boxes as you need with specific dimensions.
+* **Automatic Volume Calculation:** Converts $L \times W \times H$ into total volume instantly.
+* **Visual DP Matrix:** An expandable section that shows the "brain" of the algorithm (the computational table).
+* **Efficiency Metrics:** Real-time tracking of execution time and complexity analysis.
 
-For every cell in the table, the algorithm asks:
+---
 
-"Is the value of adding this current item plus the remaining space better than the best value I found without this item?"
+## 📊 Technical Analysis
 
-DP[i][w]=max(Value 
-i
-​	
- +DP[i−1][w−Weight 
-i
-​	
- ],DP[i−1][w])
-🚀 Key Features
-Interactive Data Entry: Input Box dimensions (L×W×H) and the app calculates volume automatically.
+| Metric | Complexity | Why? |
+| :--- | :--- | :--- |
+| **Time Complexity** | $O(N \cdot W)$ | We iterate through $N$ items for every unit of capacity $W$. |
+| **Space Complexity** | $O(N \cdot W)$ | We store a 2D table to remember sub-problem solutions (Memoization). |
 
-Backtracking Logic: The app doesn't just give a number; it traces back through the matrix to tell you exactly which boxes to pick.
+> **Note:** $N$ = Number of items, $W$ = Warehouse Capacity.
 
-Computational Transparency: An expandable "DP Matrix" view allows evaluators to see the math happening under the hood.
+---
 
-📊 Technical Analysis
-Feature	Detail
-Algorithm	Bottom-Up Dynamic Programming
-Time Complexity	O(N×W) — Linear relative to capacity and items.
-Space Complexity	O(N×W) — Required for the memoization table.
-Frontend	Streamlit (Python-based Web Framework)
-Data Handling	Pandas & NumPy
-🚦 Getting Started
-Install Requirements: pip install streamlit pandas numpy
+## 🚀 Installation & Usage
 
-Run the App: streamlit run app.py
+1. **Clone the repo:**
+   ```bash
+   git clone [https://github.com/your-username/warehouse-optimizer.git](https://github.com/your-username/warehouse-optimizer.git)
 
-Test Case: * Set Capacity to 10.
+2. **Install dependencies:**
+   ```bash
+   pip install streamlit pandas numpy
 
-Add Box 1 (Vol: 6, Price: 10).
-
-Add Box 2 (Vol: 5, Price: 7).
-
-Add Box 3 (Vol: 5, Price: 7).
-
-Result should select Box 2 and 3 for a total of 14.
-
-🔮 Future Enhancements
-3D Bin Packing: Adding logic to check if boxes physically fit (orientation), not just volume.
-
-Fractional Knapsack: Implementing a Greedy approach for items that can be divided (like grains or liquids).
+3. **Run the application:**
+   ```bash
+   streamlit run app.py
