@@ -1,4 +1,5 @@
 📦 Warehouse Space Optimizer
+
 Solving the 0/1 Knapsack Problem with Dynamic Programming
 
 This project is a visual demonstration of the 0/1 Knapsack Problem, a classic optimization challenge in computer science. It simulates a warehouse scenario where a manager must decide which boxes to store to maximize total value without exceeding the warehouse's volume capacity.
