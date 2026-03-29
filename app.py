@@ -35,6 +35,42 @@ st.set_page_config(page_title="DAA Warehouse Optimizer", layout="centered")
 # Hide Streamlit Default Menu, Footer and Element Toolbars
 hide_st_style = """
             <style>
+            /* Make app background white and hide default chrome */
+            /* Core page elements */
+            html, body, .stApp, .main, .block-container, [data-testid="stAppViewContainer"], [data-testid="stToolbar"], [data-testid="stSidebar"] {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+
+            /* Sidebar specific */
+            [data-testid="stSidebar"] > div, .stSidebar, .sidebar .sidebar-content {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+
+            /* Dataframes / tables */
+            table, .stDataFrame, .stTable, .dataframe, .stDataFrame td, .stDataFrame th, .st-table {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+
+            /* Ensure nested blocks don't carry unexpected backgrounds */
+            [data-testid="stVerticalBlock"] > div, .css-18e3th9, .css-1v3fvcr {
+                background: transparent !important;
+            }
+
+            /* Fallback: force most common containers to white */
+            main, section, header, footer, aside, div[class*="css-"] {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+
+            /* Hide Streamlit auto-generated header anchor links */
+            .stMarkdown a, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+                display: none !important;
+            }
+
+            /* Hide Streamlit chrome */
             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             header {visibility: hidden;}
